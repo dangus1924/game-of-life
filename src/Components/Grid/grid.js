@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
-import freshGrid from './clearGrid'
+import freshGrid from "./clearGrid";
+import {beehive} from './present'
 
 // create the amount of rows and column that will be used in the app
 // This is a global variable so I can access it anywhere
@@ -19,8 +20,8 @@ const operations = [
   [-1, 0],
 ];
 
-const Grid: React.FC = () => {
-  // will be using the state to store the 0,1 on and ff
+const Grid = () => {
+  // will be using the state to store the 0,1 on and off
   const [grid, setGrid] = useState(() => {
     return freshGrid();
   });
@@ -67,10 +68,12 @@ const Grid: React.FC = () => {
             }
           }
         }
+
+        console.log(grid);
       });
     });
 
-    setTimeout(startSimulation, 1000);
+    setTimeout(startSimulation, 100);
   }, []);
 
   return (
@@ -84,7 +87,7 @@ const Grid: React.FC = () => {
           }
         }}
       >
-        {start ? "stop" : "start"}
+        {start ? "pause" : "start"}
       </button>
       <button
         onClick={() => {
@@ -109,6 +112,16 @@ const Grid: React.FC = () => {
       >
         random
       </button>
+      <div>
+        <button
+          onClick={() => {
+            
+            setGrid(beehive);
+          }}
+        >
+          Beehive
+        </button>
+      </div>
 
       <div
         // used already css grid to make my grid

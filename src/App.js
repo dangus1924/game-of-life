@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from './Components/Grid/grid'
 
 
-const App: React.FC = () => {
+const App = () => {
   
   return (
     <Grid />

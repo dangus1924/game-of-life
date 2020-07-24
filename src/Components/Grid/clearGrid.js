@@ -1,4 +1,3 @@
-
 // create the amount of rows and column that will be used in the app
 // This is a global variable so I can access it anywhere
 const amountOfRows = 25;

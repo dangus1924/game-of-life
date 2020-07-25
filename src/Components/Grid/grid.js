@@ -78,6 +78,7 @@ const Grid = () => {
 
   return (
     <>
+    <h1>Conway's Game Of Life</h1>
       <button
         onClick={() => {
           setStart(!start);

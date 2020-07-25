@@ -1,11 +1,15 @@
 import React from 'react'
 import Grid from './Components/Grid/grid'
+import './app.scss'
+
 
 
 const App = () => {
   
   return (
-    <Grid />
+    <div className='container'>
+      <Grid />
+    </div>
   );
 };
 

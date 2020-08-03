@@ -1,24 +1,14 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import produce from "immer";
 import freshGrid from "./clearGrid";
-import {beehive} from './present'
+import { beehive } from "./present";
 
 // create the amount of rows and column that will be used in the app
 // This is a global variable so I can access it anywhere
 const amountOfRows = 25;
 const amountOfCols = 25;
 
-// help with the duplicate, this is to check each neighbor to compare
-const operations = [
-  [0, 1],
-  [0, -1],
-  [1, -1],
-  [-1, 1],
-  [1, 1],
-  [-1, -1],
-  [1, 0],
-  [-1, 0],
-];
+
 
 const Grid = () => {
   // will be using the state to store the 0,1 on and off
@@ -31,11 +21,18 @@ const Grid = () => {
   const startRef = useRef(start);
   startRef.current = start;
 
+  // this will count the generations
+  const [generations, setGenerations] = useState(0);
+    
+  
+
   // we want to make sure that this function is onl created once so the usecallback help.
   const startSimulation = useCallback(() => {
     if (!startRef.current) {
       return;
     }
+   
+
     // for loop with the rules of dead or alive
     setGrid((grid) => {
       // this code goes throuhg ever cell of th grid and checks
@@ -57,6 +54,7 @@ const Grid = () => {
               ) {
                 neighbors += grid[newI][newJ];
               }
+              
             });
             // check to see how much neighbor to determine the life of cell
             // this check to see if the current cell has 2 or more neighbors
@@ -66,6 +64,7 @@ const Grid = () => {
             } else if (grid[i][j] === 0 && neighbors === 3) {
               gridCopy[i][j] = 1;
             }
+            
           }
         }
 
@@ -74,11 +73,13 @@ const Grid = () => {
     });
 
     setTimeout(startSimulation, 100);
+    
   }, []);
 
   return (
     <>
-    <h1>Conway's Game Of Life</h1>
+      <h1>Conway's Game Of Life</h1>
+      <h3>Generations: {generations}</h3>
       <button
         onClick={() => {
           setStart(!start);
@@ -93,6 +94,7 @@ const Grid = () => {
       <button
         onClick={() => {
           setGrid(freshGrid());
+          setGenerations(generations == 0);
         }}
       >
         Clear
@@ -116,7 +118,6 @@ const Grid = () => {
       <div>
         <button
           onClick={() => {
-            
             setGrid(beehive);
           }}
         >

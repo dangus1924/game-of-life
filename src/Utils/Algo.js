@@ -9,3 +9,5 @@ const operations = [
     [1, 0],
     [-1, 0],
   ];
+
+export {operations}

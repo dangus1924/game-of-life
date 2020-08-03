@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import produce from "immer";
 import freshGrid from "./clearGrid";
 import { beehive } from "./present";
+import {operations} from '../../Utils/Algo'
 
 // create the amount of rows and column that will be used in the app
 // This is a global variable so I can access it anywhere
